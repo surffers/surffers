@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block title %}Detail | Surffers{% endblock %}
+
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<div class="container" x-data="{ rightSide: false, leftSide: false }">
+    {% include 'core/include/navbar.html' %}
+    <div class="main">
+        <div class="category-box has-text-centered">
+            <!--          <div class="search-bar">-->
+            <!--      <input type="text" placeholder="Search bookmark" />-->
+            <!--      <button class="right-side-button-tag">-->
+            <!--          {{ my_categories.all|length }}-->
+            <!--      </button>-->
+            <!--    </div>-->
+            <br>
+            <br>
+            <div class="hero-body">
+                <p class="title is-4">
+                    Comments
+                </p>
+                <p class="subtitle is-6">
+                    Here you can discuss interesting Internet news
+                </p>
+                <p>
+                    Comments {{ bookmarks.all|length }}
+                </p>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="container-card-test">
+
+                        <div class="card test">
+
+                            <div class="content vote has-text-centered">
+                                {% if not bookmark.user == request.user %}
+
+                                <span class="tag is-link is-light">
+                                     <a class="subtitle is-5" href="{% url 'vote' bookmark.id %}?next_page=detail">
+                                            <i class="fas fa-angle-double-up"></i>
+                                         <br>
+                                         {{ bookmark.number_of_votes }}
+                                     </a>
+                              </span>
+                                {% endif %}
+                            </div>
+
+                            <div class="card-content">
+                                <p class="title is-6">
+                                    <a class="title is-6" href="{% url 'category' bookmark.category.id %}">
+                                        {{ bookmark.category.title|truncatechars:20 }}
+                                    </a>
+                                </p>
+                                <div class="media title">
+                                    <div class="media-left">
+                                        <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}"
+                                           target="_blank"></a>
+                                    </div>
+                                    <div class="media-content">
+                                        <a href="{{ bookmark.url }}" target="_blank">
+                                            <p class="subtitle is-6 bookmark-title">
+                                                {{ bookmark.title|truncatechars:150 }}
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div class="media-right"></div>
+                                </div>
+
+                                <div class="content subtitle">
+
+                                    <a class="subtitle is-6" href="{% url 'profile' bookmark.user.username %}">
+                                        by {{ bookmark.user.username|truncatechars:20 }}
+                                    </a>
+                                    &bull;
+                                    <time class="subtitle is-6"> {{ bookmark.created_at|naturaltime }}</time>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                        <br>
+                                <div class="columns">
+                                    <div class="column is-12">
+                                    <div class="field">
+                                    <label class="label">Comment</label>
+                                    <div class="control">
+                                        <textarea class="textarea" placeholder="Enter your comment"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button is-link is-rounded is-outlined">Submit</button>
+                                    </div>
+                                    <div class="control">
+                                        <button class="button is-link is-light is-rounded">Cancel</button>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                {% include 'core/include/pagination.html' %}
+            </div>
+        </div>
+
+
+    </div>
+    {% include 'core/include/right-sidebar.html' %}
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $("a.icon-bookmark[href^='http']").each(function() {
+    $(this).css({
+        background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
+        "background-size": "100%",
+    });
+});
+
+
+</script>
+
+
+{% endblock %}

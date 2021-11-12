@@ -1,0 +1,137 @@
+.card.login {
+    width: 100%;
+}
+.login-title {
+  font-size: 4.4vw;
+  line-height: 1.1;
+  margin-bottom: 40px;
+  font-weight: 900;
+}
+.logo-login img {
+    margin-bottom: 10px;
+}
+.logo-signup img {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.hero {
+    background: #000000;
+}
+.footer.login {
+    background: #000000;
+}
+form.signup input {
+    margin-bottom: 10px;
+}
+
+form.login input {
+    margin-bottom: 20px;
+}
+
+.login-or {
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.or {
+    color: #434E4F;
+}
+
+a.secondaryAction {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+}
+
+ul.errorlist {
+    color: red;
+}
+
+#id_remember {
+    height: 20px;
+    width: 15px;
+    margin-left: 10px;
+    position: absolute;
+}
+form.signup input {
+    width: 100%;
+    color: #8C9B9D;
+    height: 40px;
+    background-color: transparent;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #434E4F;
+
+}
+
+form.login input,
+form.password_reset input {
+    width: 100%;
+    color: #8C9B9D;
+    height: 50px;
+    background-color: transparent;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #434E4F;
+
+}
+
+.socialaccount_ballot button,
+form.signup button,
+form.login button {
+    height: 55px;
+}
+
+@media (max-width: 550px) {
+    .background-image {
+        display: none;
+    }
+    .background-title {
+        display: none;
+    }
+    .modal-login {
+        left: 0;
+        background-color: transparent;
+    }
+}
+
+
+
+.google-btn {
+    color: #000;
+}
+.facebook-btn {
+    color: #32508E;
+}
+.button.twitter-btn {
+    background: red;
+}
+
+.google-button__icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 8px 0 8px 8px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+}
+
+.google-button__text {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 24px;
+  font-size: 14px;
+  list-style: none;
+}
+
+.logo-login {
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+}
+
+.button.login {
+    width: 100%;
+}

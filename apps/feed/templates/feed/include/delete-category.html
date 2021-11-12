@@ -1,0 +1,66 @@
+
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+<div id="delete-bookmark">
+    <a  class="button is-small is-rounded category-delete" @click="toggleDialog" title="Delete category">
+        <i class="far fa-trash-alt icon"></i>
+    </a>
+
+    <!-- ModalDeletedCategory -->
+<div class="modal" v-bind:class="{ 'is-active': showDialog }">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title has-text-centered">You are sure?</p>
+            <button class="delete" aria-label="close" @click="showDialog = !showDialog"></button>
+        </header>
+        <section class="modal-card-body">
+      <h1 class="title is-5">
+        Delete your category?
+      </h1>
+    <p class="subtitle is-6">
+
+This is final action and you will not be able to recover any data.
+    </p>
+
+
+    </section>
+    <footer class="modal-card-foot">
+<a href="{% url 'category_delete' category.id %}" class="card-footer-item has-text-danger" >Yes</a>
+            <a class="card-footer-item has-text-light" @click="showDialog = !showDialog">
+                No
+            </a>
+    </footer>
+
+
+    </div>
+</div>
+<!-- EndModalDeletedCategory -->
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#delete-bookmark',
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                showDialog: false,
+            }
+        },
+        methods: {
+            toggleDialog() {
+                this.showDialog = true
+            },
+        }
+    })
+</script>
+{% endblock %}

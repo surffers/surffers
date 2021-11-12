@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<section class="section">
+
+            <div class="columns is-centered">
+                <div class="column is-7">
+                    <p class="logo-signup has-text-centered">
+                        <img height="28" src="/static/img/surffers.png" width="112">
+                    </p>
+                    <h1 class="login-title is-5 has-text-centered">
+                        Saving bookmarks is now as easy as shelling pears
+                    </h1>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-2">
+                    <form action="{% url 'account_signup' %}" class="login" id="signup_form" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        {% if redirect_field_value %}
+                        <input name="{{ redirect_field_name }}" type="hidden" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        <div id="privacy-policy">
+                            <!--            <p class="subtitle is-7 has-text-centered">-->
+                            <!--              By clicking-->
+                            <!--            <a @click="toggleDialog">-->
+                            <!--              "Agree and Join"-->
+                            <!--            </a>,-->
+                            <!--            you accept the terms of the User Agreement, Privacy Policy and Cookie Policy Surffers.-->
+                            <!--          </p>-->
+                            <!-- ModalDeletedCategory -->
+                            <div class="modal" v-bind:class="{ 'is-active': showDialog }">
+                                <div class="modal-background"></div>
+                                <div class="modal-card">
+                                    <header class="modal-card-head">
+                                        <p class="modal-card-title has-text-centered">Privacy Policy</p>
+                                        <button @click="showDialog = !showDialog" aria-label="close"
+                                                class="delete"></button>
+                                    </header>
+                                    <section class="modal-card-body">
+                                        <div class="content">
+                                            <h1>Hello World</h1>
+                                            <p>Lorem ipsum<sup><a>[1]</a></sup> dolor sit amet, consectetur adipiscing
+                                                elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius
+                                                lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce
+                                                erat odio, sollicitudin vel erat vel, interdum mattis neque. Sub<sub>script</sub>
+                                                works as well!</p>
+                                            <h2>Second level</h2>
+                                            <p>Curabitur accumsan turpis pharetra <strong>augue tincidunt</strong>
+                                                blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum
+                                                id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam
+                                                mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut
+                                                et neque nisl.</p>
+                                            <ul>
+                                                <li>In fermentum leo eu lectus mollis, quis dictum mi aliquet.</li>
+                                                <li>Morbi eu nulla lobortis, lobortis est in, fringilla felis.</li>
+                                                <li>Aliquam nec felis in sapien venenatis viverra fermentum nec
+                                                    lectus.
+                                                </li>
+                                                <li>Ut non enim metus.</li>
+                                            </ul>
+                                            <h3>Third level</h3>
+                                            <p>Quisque ante lacus, malesuada ac auctor vitae, congue <a href="#">non
+                                                ante</a>. Phasellus lacus ex, semper ac tortor nec, fringilla
+                                                condimentum orci. Fusce eu rutrum tellus.</p>
+                                            <ol>
+                                                <li>Donec blandit a lorem id convallis.</li>
+                                                <li>Cras gravida arcu at diam gravida gravida.</li>
+                                                <li>Integer in volutpat libero.</li>
+                                                <li>Donec a diam tellus.</li>
+                                                <li>Aenean nec tortor orci.</li>
+                                                <li>Quisque aliquam cursus urna, non bibendum massa viverra eget.</li>
+                                                <li>Vivamus maximus ultricies pulvinar.</li>
+                                            </ol>
+                                            <blockquote>Ut venenatis, nisl scelerisque sollicitudin fermentum, quam
+                                                libero hendrerit ipsum, ut blandit est tellus sit amet turpis.
+                                            </blockquote>
+                                            <p>Quisque at semper enim, eu hendrerit odio. Etiam auctor nisl et <em>justo
+                                                sodales</em> elementum. Maecenas ultrices lacus quis neque consectetur,
+                                                et lobortis nisi molestie.</p>
+                                            <p>Sed sagittis enim ac tortor maximus rutrum. Nulla facilisi. Donec mattis
+                                                vulputate risus in luctus. Maecenas vestibulum interdum commodo.</p>
+                                            <dl>
+                                                <dt>Web</dt>
+                                                <dd>The part of the Internet that contains websites and web pages</dd>
+                                                <dt>HTML</dt>
+                                                <dd>A markup language for creating web pages</dd>
+                                                <dt>CSS</dt>
+                                                <dd>A technology to make HTML look better</dd>
+                                            </dl>
+                                            <p>Suspendisse egestas sapien non felis placerat elementum. Morbi tortor
+                                                nisl, suscipit sed mi sit amet, mollis malesuada nulla. Nulla facilisi.
+                                                Nullam ac erat ante.</p>
+                                            <h4>Fourth level</h4>
+                                            <p>Nulla efficitur eleifend nisi, sit amet bibendum sapien fringilla ac.
+                                                Mauris euismod metus a tellus laoreet, at elementum ex efficitur.</p>
+                                            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Hello World&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mollis.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+                                            <p>Maecenas eleifend sollicitudin dui, faucibus sollicitudin augue cursus
+                                                non. Ut finibus eleifend arcu ut vehicula. Mauris eu est maximus est
+                                                porta condimentum in eu justo. Nulla id iaculis sapien.</p>
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <th>One</th>
+                                                    <th>Two</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Three</td>
+                                                    <td>Four</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Five</td>
+                                                    <td>Six</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Seven</td>
+                                                    <td>Eight</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nine</td>
+                                                    <td>Ten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Eleven</td>
+                                                    <td>Twelve</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <p>Phasellus porttitor enim id metus volutpat ultricies. Ut nisi nunc,
+                                                blandit sed dapibus at, vestibulum in felis. Etiam iaculis lorem ac nibh
+                                                bibendum rhoncus. Nam interdum efficitur ligula sit amet ullamcorper.
+                                                Etiam tristique, leo vitae porta faucibus, mi lacus laoreet metus, at
+                                                cursus leo est vel tellus. Sed ac posuere est. Nunc ultricies nunc
+                                                neque, vitae ultricies ex sodales quis. Aliquam eu nibh in libero
+                                                accumsan pulvinar. Nullam nec nisl placerat, pretium metus vel, euismod
+                                                ipsum. Proin tempor cursus nisl vel condimentum. Nam pharetra varius
+                                                metus non pellentesque.</p>
+                                            <h5>Fifth level</h5>
+                                            <p>Aliquam sagittis rhoncus vulputate. Cras non luctus sem, sed tincidunt
+                                                ligula. Vestibulum at nunc elit. Praesent aliquet ligula mi, in luctus
+                                                elit volutpat porta. Phasellus molestie diam vel nisi sodales, a
+                                                eleifend augue laoreet. Sed nec eleifend justo. Nam et sollicitudin
+                                                odio.</p>
+                                            <figure>
+                                                <img src="https://bulma.io/images/placeholders/256x256.png">
+                                                <img src="https://bulma.io/images/placeholders/256x256.png">
+                                                <figcaption>
+                                                    Figure 1: Some beautiful placeholders
+                                                </figcaption>
+                                            </figure>
+                                            <h6>Sixth level</h6>
+                                            <p>Cras in nibh lacinia, venenatis nisi et, auctor urna. Donec pulvinar
+                                                lacus sed diam dignissim, ut eleifend eros accumsan. Phasellus non
+                                                tortor eros. Ut sed rutrum lacus. Etiam purus nunc, scelerisque quis
+                                                enim vitae, malesuada ultrices turpis. Nunc vitae maximus purus, nec
+                                                consectetur dui. Suspendisse euismod, elit vel rutrum commodo, ipsum
+                                                tortor maximus dui, sed varius sapien odio vitae est. Etiam at cursus
+                                                metus.</p>
+                                        </div>
+                                    </section>
+                                    <footer class="modal-card-foot">
+                                        <button @click="showDialog = !showDialog" aria-label="close" class="button">
+                                            Cancel
+                                        </button>
+                                    </footer>
+
+
+                                </div>
+                            </div>
+                            <!-- EndModalDeletedCategory -->
+                        </div>
+                        <br>
+                        <button class="button login is-outlined is-rounded" type="submit">{% trans "Sign up" %}</button>
+                    </form>
+                    <!--             <div class="socialaccount_ballot">-->
+                    <!--                            <div class="login-or">-->
+                    <!--                                <b class="or">&mdash;</b>-->
+                    <!--                                {% trans 'or' %}-->
+                    <!--                                <b class="or">&mdash;</b>-->
+                    <!--                            </div>-->
+                    <!--                            <button class="button" type="button">-->
+                    <!--                                <span class="google-button__icon">-->
+                    <!--      <svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg"><path-->
+                    <!--              d="M125.9 10.2c40.2-13.9 85.3-13.6 125.3 1.1 22.2 8.2 42.5 21 59.9 37.1-5.8 6.3-12.1 12.2-18.1 18.3l-34.2 34.2c-11.3-10.8-25.1-19-40.1-23.6-17.6-5.3-36.6-6.1-54.6-2.2-21 4.5-40.5 15.5-55.6 30.9-12.2 12.3-21.4 27.5-27 43.9-20.3-15.8-40.6-31.5-61-47.3 21.5-43 60.1-76.9 105.4-92.4z"-->
+                    <!--              fill="#EA4335" id="Shape"/><path-->
+                    <!--              d="M20.6 102.4c20.3 15.8 40.6 31.5 61 47.3-8 23.3-8 49.2 0 72.4-20.3 15.8-40.6 31.6-60.9 47.3C1.9 232.7-3.8 189.6 4.4 149.2c3.3-16.2 8.7-32 16.2-46.8z"-->
+                    <!--              fill="#FBBC05" id="Shape"/><path-->
+                    <!--              d="M361.7 151.1c5.8 32.7 4.5 66.8-4.7 98.8-8.5 29.3-24.6 56.5-47.1 77.2l-59.1-45.9c19.5-13.1 33.3-34.3 37.2-57.5H186.6c.1-24.2.1-48.4.1-72.6h175z"-->
+                    <!--              fill="#4285F4" id="Shape"/><path-->
+                    <!--              d="M81.4 222.2c7.8 22.9 22.8 43.2 42.6 57.1 12.4 8.7 26.6 14.9 41.4 17.9 14.6 3 29.7 2.6 44.4.1 14.6-2.6 28.7-7.9 41-16.2l59.1 45.9c-21.3 19.7-48 33.1-76.2 39.6-31.2 7.1-64.2 7.3-95.2-1-24.6-6.5-47.7-18.2-67.6-34.1-20.9-16.6-38.3-38-50.4-62 20.3-15.7 40.6-31.5 60.9-47.3z"-->
+                    <!--              fill="#34A853"/></svg>-->
+                    <!--    </span>-->
+                    <!--                                <span class="google-button__text">{% include "socialaccount/snippets/provider_list.html" with process="login" %}</span>-->
+                    <!--                            </button>-->
+                    <!--                        </div>-->
+                    <br>
+                    <p class="subtitle is-7 has-text-centered">
+                        {% blocktrans %}Already have an account? Then please
+                        <a href="{{ login_url }}">Sign in</a>
+                        {% endblocktrans %}
+                    </p>
+                </div>
+
+            </div>
+
+</section>
+
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+  new Vue({
+    el: '#privacy-policy',
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+        showDialog: false,
+      }
+    },
+    methods: {
+      toggleDialog(id) {
+        this.showDialog = true
+      },
+    }
+  })
+
+</script>
+
+<script>
+// COOKIE
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  }
+  let cookiecook = getCookie("cookiecook"),
+  cookiewin = document.getElementsByClassName('cookie-banner')[0];  
+  
+  if (cookiecook != "no") {
+    // показываем  
+    cookiewin.style.display="block";  
+    // закрываем по клику
+    document.getElementById("cookie_close").addEventListener("click", function(){
+    cookiewin.style.display="none";  
+     
+    let date = new Date;
+    date.setDate(date.getDate() + 1);  
+    document.cookie = "cookiecook=no; path=/; expires=" + date.toUTCString();  
+    });
+  }
+
+</script>
+{% endblock %}

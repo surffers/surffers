@@ -1,0 +1,62 @@
+.container-card {
+  position: relative;
+  width: 100%;
+  min-width: auto;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  position: relative;
+   border-radius: 10px;
+    margin: 5px;
+}
+.card.home {
+    height: 240px;
+    width: 146px;
+    text-align: center;
+    margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+   flex-direction: row;
+   justify-content: center;
+  align-content: center; /* used this for multiple child */
+  align-items: center; /* if an only child */
+}
+.card.dashboard {
+   height: 160px;
+    width: 146px;
+
+}
+
+
+.card-footer-item.icon-bookmark{
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: 22px;
+    border: none;
+}
+
+
+
+.suppoprt-me {
+  display: inline-block;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 20vw;
+  max-width: 150px;
+  min-width: 100px;
+  z-index: 9;
+}
+.suppoprt-me img {
+  width: 100%;
+  height: auto;
+}
+
+

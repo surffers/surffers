@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block title %}Login | Surfers{% endblock %}
+{% load i18n %}
+{% load static %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<section class="section">
+
+
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <h1 class="login-title has-text-centered">
+                        Create categories to save bookmarks
+                    </h1>
+                </div>
+            </div>
+            <div class="columns is-centered">
+
+                <div class="column is-2">
+                    <span class="logo-login">
+                        <img height="28" src="/static/img/surffers.png" width="112">
+                    </span>
+                    {% get_providers as socialaccount_providers %}
+                    {% if socialaccount_providers %}
+                    {% include "socialaccount/snippets/login_extra.html" %}
+                    {% else %}
+                    <p>{% blocktrans %}If you have not created an account yet, then please
+                        <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+                    </p>
+                    {% endif %}
+                    <form action="{% url 'account_login' %}" class="login" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <a class="secondaryAction has-text-primary" href="{% url 'account_reset_password' %}">
+                            {% trans "Forgot your password?" %}</a>
+                        <br>
+                        <button class="button primaryAction is-outlined is-rounded login" type="submit">
+                            {% trans "Sign In" %}
+                        </button>
+                        {% if redirect_field_value %}
+                        <input class="field" name="{{ redirect_field_name }}" type="hidden"
+                               value="{{ redirect_field_value }}"/>
+                        {% endif %}
+
+                    </form>
+                    <br>
+                    <p class="subtitle is-7 has-text-centered">
+                        {% blocktrans with site.name as site_name %}
+                        New to Surffers?
+                        <a href="{{ signup_url }}">
+                            Sign up
+                        </a>
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+
+<!--            <footer class="footer login">-->
+<!--                <div class="content has-text-centered">-->
+<!--                    <p>-->
+<!--                        © 2021 Surffers-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            </footer>-->
+
+
+</section>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  new Vue({
+    el: '#privacy-policy',
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+        showDialog: false,
+      }
+    },
+    methods: {
+      toggleDialog(id) {
+        this.showDialog = true
+      },
+    }
+  })
+
+
+
+</script>
+
+<script>
+  var btn = $('#button');
+
+  $(window).scroll(function () {
+    if ($(window).scrollTop() > 300) {
+      btn.addClass('show');
+    } else {
+      btn.removeClass('show');
+    }
+  });
+
+  btn.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({
+      scrollTop: 0
+    }, '300');
+  });
+
+
+
+</script>
+<script>
+// COOKIE
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  }
+  let cookiecook = getCookie("cookiecook"),
+  cookiewin = document.getElementsByClassName('cookie-banner')[0];  
+  
+  if (cookiecook != "no") {
+    // показываем  
+    cookiewin.style.display="block";  
+    // закрываем по клику
+    document.getElementById("cookie_close").addEventListener("click", function(){
+    cookiewin.style.display="none";  
+     
+    let date = new Date;
+    date.setDate(date.getDate() + 1);  
+    document.cookie = "cookiecook=no; path=/; expires=" + date.toUTCString();  
+    });
+  }
+
+
+
+</script>
+{% endblock %}

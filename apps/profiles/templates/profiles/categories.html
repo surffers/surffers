@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block title %}Categories | Surffers{% endblock %}
+
+{% load static %}
+{% block content %}
+
+<div class="container" x-data="{ rightSide: false, leftSide: false }">
+{% include 'core/include/navbar.html' %}
+  <div class="main">
+      <div class="profile-box">
+          <br><br>
+  <div class="hero-body">
+
+
+                         <div class="media">
+
+          {% if user.profile.url %}
+             <div class="media-left">
+                <a class="card-footer-item icon-bookmark" href="{{ user.profile.url }}" target="_blank"></a>
+                 </div>
+          {% else %}
+
+
+                {% endif %}
+
+
+      <div class="media-content">
+        <p class="title is-5">{{ user.username|truncatechars:11 }}</p>
+      </div>
+            <div class="media-right">
+                {% if user != request.user %}
+
+                {% if request.user.profile in user.profile.followed_by.all %}
+                <!-- Button-unfollow -->
+                {% include 'profiles/include/button-unfollow.html' %}
+                <!-- End-button-unfollow -->
+                {% else %}
+
+                {% if request.user.is_authenticated %}
+                <span class="follow">
+                    <a class="button is-white is-outlined follow is-small is-rounded" href="{% url 'follow_user' user.username %}">
+                    Follow
+                </a>
+                </span>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                <br>
+                 {% if request.user == user %}
+
+                {% include 'profiles/include/user-edit-profile.html' %}
+
+        {% endif %}
+            </div>
+    </div>
+      <br>
+ <p class="subtitle is-6">
+                {% if user.profile.bio %}
+                {{ user.profile.bio }}
+                {% else %}
+                No bio
+                {% endif %}
+            </p>
+
+  </div>
+<hr>
+<nav class="level is-mobile">
+    <div class="level-item has-text-centered">
+        <div>
+            <a class="has-text-white">
+                <p class="heading">Links</p>
+            <p class="title is-5">{{ user_bookmarks.all|length }}</p>
+            </a>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+                   <a href="{% url 'categories' user.username %}" >
+                <p class="heading">Categories</p>
+            <p class="title is-5 has-text-link">{{ categories.all|length }}</p>
+            </a>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <a href="{% url 'follows' user.username %}" class="has-text-white">
+                <p class="heading">
+                    Following
+                </p>
+                <p class="title is-5">
+                    {{ user.profile.follows.count }}
+                </p>
+            </a>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <a href="{% url 'followers' user.username %}" class="has-text-white">
+                <p class="heading">Followers</p>
+                <p class="title is-5">{{ user.profile.followed_by.count }}</p>
+            </a>
+        </div>
+    </div>
+
+</nav>
+<hr>
+</div>
+    <div class="main-container">
+ <div class="container-card">
+                 {% for category in categories %}
+
+                    <div class="card dashboard">
+                        <div class="card-content">
+                            <div class="media">
+                                <a href="{% url 'category' category.id %}">
+                                    <p class="title is-7" title="{{ category.title }}">
+                                        {{ category.title|truncatechars:25}}
+                                    </p>
+                                </a>
+
+                            </div>
+                            {% if category.body %}
+                            <a href="{% url 'category' category.id %}">
+                                <p class="subtitle is-7">
+                                    {{ category.body|truncatechars:30 }}
+                                </p>
+                            </a>
+                            {% else %}
+                            <a href="{% url 'category' category.id %}">
+                                <p class="subtitle is-7">
+                                    No description
+                                </p>
+                            </a>
+
+                            {% endif %}
+
+
+
+                        </div>
+                    </div>
+                    {% empty %}
+                            <div class="box">
+                                <h2 class="title is-6 has-text-centered">
+                                    No category
+                                </h2>
+                            </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+
+  </div>
+
+   {% include 'core/include/right-sidebar.html' %}
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $("a.icon-bookmark[href^='http']").each(function() {
+    $(this).css({
+        background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
+        "background-size": "100%",
+    });
+});
+
+</script>
+{% endblock %}

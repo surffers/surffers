@@ -1,0 +1,21 @@
+.navbar {
+    border: none;
+border-bottom: 1px solid #343C3D;
+
+}
+.navbar-item.logo {
+    height: auto;
+}
+.navbar-item img {
+    width: 30px;
+    height: 30px;
+}
+.navbar-end.desktop {
+    margin-right: 20px;
+
+}
+.navbar-end.navbar-burger {
+    height: auto;
+    margin-top: 5px;
+    width: auto;
+}

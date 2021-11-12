@@ -1,0 +1,112 @@
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div id="edit-category">
+
+
+  {% if request.user == user %}
+    <a @click="toggleDialog" class="button is-small is-rounded category-edit" title="Edit category">
+                        <i class="fas fa-pencil-alt icon"></i>
+                    </a>
+  {% endif %}
+
+<!-- ModalDeletedCategory -->
+<div class="modal" v-bind:class="{ 'is-active': showDialog }">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title has-text-centered">
+            Change category
+      </p>
+      <button class="delete" aria-label="close" @click="showDialog = !showDialog"></button>
+    </header>
+
+ <footer class="modal-card-foot">
+
+
+                <div class="column is-11">
+        <form class="form-add-category" method="post">
+          {% csrf_token %}
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+<!--    <label class="label">Title</label>-->
+    <label class="label has-text-left">Title:</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        {{ FormEdit.title }}
+      </div>
+      <p class="help has-text-left">The title should convey the essence of the category.</p>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label has-text-left">Description:</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        {{ FormEdit.body }}
+      </div>
+      <p class="help has-text-left">The description should be short and clear.</p>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label">
+    <!-- Left empty for spacing -->
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary is-outlined is-rounded login" type="submit" name="btnedit">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </form>
+
+</div>
+
+            </footer>
+  </div>
+</div>
+<!-- EndModalDeletedCategory -->
+
+
+
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#edit-category',
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+        showDialog: false,
+      }
+    },
+    methods: {
+      toggleDialog(id) {
+        this.showDialog = true
+      },
+    }
+  })
+</script>
+
+{% endblock %}

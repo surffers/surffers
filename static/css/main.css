@@ -1,0 +1,81 @@
+@import "/static/css/media.css";
+@import "/static/css/cookie.css";
+@import "/static/css/pricing.css";
+@import "/static/css/profile.css";
+@import "/static/css/home.css";
+@import "/static/css/button-share.css";
+@import "/static/css/button.css";
+@import "/static/css/dropdown.css";
+@import "/static/css/navbar.css";
+@import "/static/css/test.css";
+@import "/static/css/blog.css";
+@import "/static/css/login.css";
+@import "/static/css/modal.css";
+@import "/static/css/search.css";
+@import "/static/css/settings.css";
+@import "/static/css/sidebar.css";
+@import "/static/css/category.css";
+
+
+
+
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.border {
+    border: 1px solid red;
+}
+
+
+.share {
+    margin-right: 10px;
+}
+.box {
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+input.input::placeholder {
+   color: #8C9B9D;
+}
+
+input.input {
+    height: 40px;
+    background-color: transparent;
+    color: #8C9B9D;
+}
+
+input.input.is-small {
+    height: 100%;
+}
+
+input#id_img {
+    padding: 12px;
+}
+
+textarea.textarea::placeholder {
+   color: #8C9B9D;
+}
+
+textarea.textarea {
+    background-color: transparent;
+    max-height: 90px;
+    color: #8C9B9D;
+}
+
+.form-add-category {
+    width: 100%;
+}
+
+

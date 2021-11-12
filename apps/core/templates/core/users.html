@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Users | Surffers{% endblock %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<div class="container" x-data="{ rightSide: false, leftSide: false }">
+{% include 'core/include/navbar.html' %}
+  <div class="main">
+
+
+      <div class="category-box has-text-centered">
+<!--          <div class="search-bar">-->
+<!--      <input type="text" placeholder="Search bookmark" />-->
+<!--      <button class="right-side-button-tag">-->
+<!--          {{ profiles.all|length }}-->
+<!--      </button>-->
+<!--    </div>-->
+          <br><br>
+  <div class="hero-body">
+       <p class="title is-4">
+                            Users
+                        </p>
+                        <p class="subtitle is-6">
+                            Find a user and follow him
+                        </p>
+
+  </div>
+
+</div>
+    <div class="main-container">
+<div class="container-card">
+                  {% for profile in profiles.all %}
+                <div class="card home">
+                        <div class="card-content">
+                            {% if profile.url %}
+                <a class="card-footer-item icon-bookmark" href="{{ profile.url }}" target="_blank"></a>
+          {% endif %}
+
+                            <a class="title is-6" href="{% url 'profile' profile.user.username %}">
+                                <p >
+                                    {{ profile.user.username }}
+                                </p>
+                                <p class="subtitle is-7">
+                                        <b>{{ profile.followed_by.count }}</b> Followers
+                                    </p>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+
+                    {% endfor %}
+
+        </div>
+            </div>
+
+
+
+  </div>
+
+   {% include 'core/include/right-sidebar.html' %}
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $("a.icon-bookmark[href^='http']").each(function() {
+    $(this).css({
+        background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
+        "background-size": "22px 22px",
+    });
+});
+</script>
+
+{% endblock %}
+
+

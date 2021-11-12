@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if user.profile.user.username %}
+{{ user.username }}
+{% endif %}
+{% endblock %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container" x-data="{ rightSide: false, leftSide: false }">
+{% include 'core/include/navbar.html' %}
+  <div class="main">
+      <div class="profile-box has-text-centered">
+          <br><br>
+  <div class="hero-body">
+          {% if user.profile.url %}
+
+                <a class="card-footer-item icon-bookmark" href="{{ user.profile.url }}" target="_blank"></a>
+
+          {% else %}
+
+
+                {% endif %}
+
+
+
+        <p class="title is-5">{{ user.username|truncatechars:25 }}</p>
+
+
+
+      <br>
+ <p class="subtitle is-6">
+                {% if user.profile.bio %}
+                {{ user.profile.bio }}
+                {% else %}
+                No bio
+                {% endif %}
+            </p>
+ <div class="media profile">
+                {% if user != request.user %}
+
+                {% if request.user.profile in user.profile.followed_by.all %}
+                <!-- Button-unfollow -->
+                {% include 'profiles/include/button-unfollow.html' %}
+                <!-- End-button-unfollow -->
+                {% else %}
+
+                {% if request.user.is_authenticated %}
+                <span class="follow">
+                    <a class="button is-outlined follow is-small is-rounded" href="{% url 'follow_user' user.username %}">
+                    Follow
+                </a>
+                </span>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                <br>
+                 {% if request.user == user %}
+
+                {% include 'profiles/include/user-edit-profile.html' %}
+
+        {% endif %}
+            </div>
+  </div>
+<hr>
+<nav class="level is-mobile">
+    <div class="level-item has-text-centered">
+        <div>
+            <a class="has-text-primary">
+                <p class="heading">Links</p>
+            <p class="title is-5 has-text-primary">{{ user_bookmarks.all|length|intword }}</p>
+            </a>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+                   <a href="{% url 'categories' user.username %}" class="title">
+                <p class="heading">Categories</p>
+            <p class="title is-5">{{ categories.all|length|intword }}</p>
+            </a>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <a href="{% url 'follows' user.username %}" class="title">
+                <p class="heading">
+                    Following
+                </p>
+                <p class="title is-5">
+                    {{ user.profile.follows.count|intword }}
+                </p>
+            </a>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <a href="{% url 'followers' user.username %}" class="title">
+                <p class="heading">Followers</p>
+                <p class="title is-5">{{ user.profile.followed_by.count|intword }}</p>
+            </a>
+        </div>
+    </div>
+
+</nav>
+<hr>
+</div>
+    <div class="main-container">
+<div class="container-card">
+                    {% for bookmark in user_bookmarks %}
+
+                        <div class="card home">
+                            <div class="card-content">
+                                         <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}"
+                                           target="_blank"></a>
+                                        <a href="{{ bookmark.url }}" target="_blank">
+                                            <p class="title is-6 bookmark-title" title="{{ bookmark.title }}">
+                                                {{ bookmark.title|truncatechars:25}}
+                                            </p>
+                                        </a>
+                                <p class="title is-7 visit-title">
+                                        {{ bookmark.created_at|naturalday }}
+                                    </p>
+
+                            </div>
+                        </div>
+
+{% empty %}
+
+                        <div class="box">
+                            <p class="title is-6 has-text-centered">
+                            No bookmark
+                        </p>
+                        </div>
+
+
+                {% endfor %}
+                </div>
+            </div>
+
+
+
+  </div>
+  {% include 'core/include/right-sidebar.html' %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $("a.icon-bookmark[href^='http']").each(function() {
+    $(this).css({
+        background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
+        "background-size": "contain",
+    });
+});
+</script>
+
+
+
+{% endblock %}
+
+
+
+
+
