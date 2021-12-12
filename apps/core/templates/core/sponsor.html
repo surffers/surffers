@@ -4,10 +4,76 @@
 {% load humanize %}
 {% block content %}
 
+<div class="container" x-data="{ rightSide: false, leftSide: false }">
+       {% include 'core/include/right-sidebar.html' %}
+
+    <div class="main">
+          {% include 'core/include/navbar.html' %}
+        <div class="category-box has-text-centered">
+            <br><br>
+            <div class="hero-body">
+                <p class="title is-3">
+                    Sponsor
+                </p>
+                <p class="subtitle is-4">
+                    Hello everyone, I am developing this project alone and there is not always enough time and finance to deal with it,
+                    I want to try to sell it, here you can buy my project or help me financially to further develop this project
+                    and see what happens.
+            </div>
+        </div>
 
 
 
-https://paypal.me/aleksandrkarpuk?locale.x=ru_RU
+         <section class="section sponsor">
+                  <div class="columns is-centered">
+                  <div class="column is-4 has-text-centered">
+
+                      <a href="">
+                          <img src="/static/img/patreon.jpg" alt="Placeholder image">
+                      </a>
+
+              </div>
+                  <div class="column is-4 has-text-centered">
+                        <a href="">
+                          <img src="/static/img/paypal.png" alt="Placeholder image">
+                      </a>
+              </div>
+              </div>
+              </section>
+
+              <section class="section sponsor">
+                  <div class="columns is-centered">
+                  <div class="column is-4 has-text-centered">
+                      <a href="">
+                          <img src="/static/img/coffe.png" alt="Placeholder image">
+                      </a>
+              </div>
+                  <div class="column is-4 has-text-centered">
+                     <a href="">
+                          <img src="/static/img/kofi.png" alt="Placeholder image">
+                      </a>
+              </div>
+              </div>
+              </section>
+
+        <div class="column is-12 has-text-centered">
+          <p class="subtitle is-3 has-text-success">
+                       100 &#8383;
+
+                    </p>
+                <a href="#" class="button is-primary is-outlined is-large">
+                    0x9A81C5701A7056D96ED9AEc42e2287e57007889C
+                </a>
+      </div>
+
+            <div class="section">
+                {% include 'core/include/pagination.html' %}
+            </div>
+
+    </div>
+
+</div>
+
 
 
 

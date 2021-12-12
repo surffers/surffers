@@ -1,15 +1,16 @@
-
 {% load static %}
 {% load humanize %}
 
 {% block content %}
-<div id="btn-add-category">
+<div id="add-category">
 
-
-
-    <span @click="toggleDialog" class="button is-small is-primary is-outlined is-rounded add-category">
-       <i class="fas fa-plus icon"></i>
+      <span @click="toggleDialog" class="add-category" title="Create category">
+       <img src="/static/img/plus.png" alt="">
       </span>
+
+
+
+
 
 
 <!-- ModalDeletedCategory -->
@@ -28,10 +29,11 @@
     </header>
 
 
- <footer class="modal-card-foot">
+   <footer class="modal-card-foot">
 
 
-                <div class="column is-11">
+                <div class="column is-12">
+
 
 
         <form class="form-add-category" method="post" enctype="multipart/form-data">
@@ -78,7 +80,7 @@
   <div class="field-body">
     <div class="field">
       <div class="control">
-        <button class="button is-primary is-outlined is-rounded login" type="submit">
+        <button class="button is-primary login" type="submit" name="btnaddcategory">
           Create
         </button>
       </div>
@@ -89,7 +91,7 @@
         </form>
 
 
-  </div>
+</div>
 
             </footer>
 
@@ -110,7 +112,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type="text/javascript">
   new Vue({
-    el: '#btn-add-category',
+    el: '#add-category',
     delimiters: ['[[', ']]'],
     data() {
       return {

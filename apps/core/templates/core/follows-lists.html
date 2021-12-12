@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block title %}Surfers - bookmark storage platform{% endblock %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container" x-data="{ rightSide: false, leftSide: false }">
+ {% include 'core/include/right-sidebar.html' %}
+
+    <div class="main">
+        {% include 'core/include/navbar.html' %}
+        <div class="category-box has-text-centered">
+            <div class="hero-body">
+                <p class="title is-3">
+                    Follows Lists
+                </p>
+                <p class="subtitle is-4">
+                    User links for you follow
+                </p>
+                <p class="subtitle is-5">
+                    Bookmark{{ bookmarks.all|length|pluralize:"s" }} {{ user_bookmarks.all|length }}
+                </p>
+                <!--      <br>-->
+                <!--      <div class="tags are-medium is-centered">-->
+                <!--  <span class="tag">All</span>-->
+                <!--  <span class="tag">Medium</span>-->
+                <!--  <span class="tag">Size</span>-->
+                <!--</div>-->
+
+            </div>
+
+        </div>
+
+
+        <div class="main-container">
+
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="container-card">
+
+
+                        {% for bookmark in page_obj %}
+
+                        <div class="card follows-lists">
+
+                            <div class="card-content">
+                                <div class="media title">
+                                    <div class="media-left">
+                                        <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}"
+                                           target="_blank"></a>
+                                    </div>
+                                    <div class="media-content">
+                                        <p class="title is-6">
+                                            <a class="title is-6" href="{{ bookmark.url }}" target="_blank">
+                                                {{ bookmark.title|truncatechars:150 }}
+                                            </a>
+                                        </p>
+
+                                        <p class="subtitle is-6">
+                                            for
+                                            <a class="has-text-primary"
+                                               href="{% url 'category' bookmark.category.id %}">
+                                                {{ bookmark.category.title|truncatechars:25 }}
+                                            </a>
+                                        </p>
+
+
+                                    </div>
+                                    <div class="media-right"></div>
+                                </div>
+
+                                <div class="content title is-6">
+                                    <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                        {{ bookmark.body|truncatechars:150 }}
+                                    </a>
+
+                                </div>
+
+                                <div class="content title is-6">
+                                    by
+                                    <a class="subtitle is-6 has-text-primary"
+                                       href="{% url 'profile' bookmark.user.username %}">
+                                        {{ bookmark.user.username|truncatechars:20 }}
+                                    </a>
+                                    &bull;
+                                           <time class="subtitle is-6"> {{ bookmark.created_at|naturaltime }}</time>
+                                                                     &bull;
+                                     <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                         {{ bookmark.number_of_votes }} votes
+                                     </a>
+                                    &bull;
+                                    <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                        {{ bookmark.comments.all|length }} comments
+                                    </a>
+                                </div>
+
+                                {% for tag in bookmark.tags.all %}
+                                <a class="tag is-primary is-light is-outlined" href="{{ tag.get_absolute_url }}">
+                                    #{{ tag }}
+                                </a>
+                                {% endfor %}
+
+                            </div>
+
+                            {% if not bookmark.user == request.user %}
+                              <footer class="card-footer">
+                            <a href="{% url 'vote' bookmark.id %}" class="card-footer-item has-text-primary">
+                                 <i class="fas fa-sort-amount-up"></i>
+                                 {{ bookmark.number_of_votes }} votes
+                            </a>
+                          </footer>
+                             {% endif %}
+
+                        </div>
+
+
+                        {% empty %}
+                        <div class="box">
+                            <p class="title is-6 has-text-centered">
+                                Your feed is empty
+                            </p>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="section">
+                        {% include 'core/include/pagination.html' %}
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $("a.icon-bookmark[href^='http']").each(function() {
+    $(this).css({
+        background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
+        "background-size": "100%",
+    });
+});
+</script>
+
+{% endblock %}

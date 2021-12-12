@@ -10,28 +10,33 @@
 {% block content %}
 
 <div class="container" x-data="{ rightSide: false, leftSide: false }">
-{% include 'core/include/navbar.html' %}
-  <div class="main">
+    {% include 'core/include/right-sidebar.html' %}
+
+
+          <div class="main">
+      {% include 'core/include/navbar.html' %}
+               <div class="columns is-centered">
+      <div class="column is-7">
       <div class="profile-box has-text-centered">
           <br><br>
   <div class="hero-body">
           {% if user.profile.url %}
-
-                <a class="card-footer-item icon-bookmark" href="{{ user.profile.url }}" target="_blank"></a>
-
+            <a class="card-footer-item icon-bookmark" href="{{ user.profile.url }}" target="_blank"></a>
           {% else %}
 
+           {% endif %}
+      <p class="title is-4">{{ user.username|truncatechars:25 }}</p>
 
-                {% endif %}
+      <div class="tabs is-centered is-small">
+          <ul>
+              <li><a>{{ user.comments.all|length }} comments</a></li>
+            <li><a>{{ number_of_votes }} votes</a></li>
 
+          </ul>
+        </div>
 
-
-        <p class="title is-5">{{ user.username|truncatechars:25 }}</p>
-
-
-
-      <br>
- <p class="subtitle is-6">
+        <br>
+            <p class="subtitle is-6">
                 {% if user.profile.bio %}
                 {{ user.profile.bio }}
                 {% else %}
@@ -49,9 +54,9 @@
 
                 {% if request.user.is_authenticated %}
                 <span class="follow">
-                    <a class="button is-outlined follow is-small is-rounded" href="{% url 'follow_user' user.username %}">
-                    Follow
-                </a>
+                    <a class="button is-primary" href="{% url 'follow_user' user.username %}">
+                        Follow
+                    </a>
                 </span>
                 {% endif %}
                 {% endif %}
@@ -61,11 +66,11 @@
 
                 {% include 'profiles/include/user-edit-profile.html' %}
 
-        {% endif %}
+                {% endif %}
             </div>
   </div>
-<hr>
-<nav class="level is-mobile">
+
+<nav class="level is-mobile profile">
     <div class="level-item has-text-centered">
         <div>
             <a class="has-text-primary">
@@ -104,27 +109,48 @@
     </div>
 
 </nav>
-<hr>
+
 </div>
+
     <div class="main-container">
 <div class="container-card">
                     {% for bookmark in user_bookmarks %}
+                    <div class="card home">
+                    <div class="card-content">
+                        {% if user == category.user %}
+                        <a class="delete category-dropdown"
+                           href="{% url 'bookmark_delete' category.id bookmark.id %}"></a>
+                        {% endif %}
 
-                        <div class="card home">
-                            <div class="card-content">
-                                         <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}"
-                                           target="_blank"></a>
-                                        <a href="{{ bookmark.url }}" target="_blank">
-                                            <p class="title is-6 bookmark-title" title="{{ bookmark.title }}">
-                                                {{ bookmark.title|truncatechars:25}}
-                                            </p>
-                                        </a>
-                                <p class="title is-7 visit-title">
-                                        {{ bookmark.created_at|naturalday }}
-                                    </p>
+                        <div class="media title">
+                            <div class="media-left">
+                                <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}" target="_blank"></a>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">
+                                    <a class="title is-4" href="{% url 'detail' bookmark.id %}" target="_blank">
+                                        {{ bookmark.title|truncatechars:45 }}
+                                    </a>
+                                </p>
 
                             </div>
+                            <div class="media-right"></div>
                         </div>
+                        <div class="content">
+                            <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                {{ bookmark.body|truncatechars:100 }}
+                            </a>
+                        </div>
+                        <div class="content subtitle is-6 ">
+                                {{ bookmark.created_at|naturaltime }}
+                            &bull;
+                            <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                {{ bookmark.comments.all|length }} comments
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
 
 {% empty %}
 
@@ -142,7 +168,9 @@
 
 
   </div>
-  {% include 'core/include/right-sidebar.html' %}
+      </div>
+  </div>
+
 </div>
 
 {% endblock %}

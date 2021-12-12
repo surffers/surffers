@@ -4,57 +4,31 @@
 {% load account socialaccount %}
 
 {% block content %}
-
-
-
-
-
-
-<nav class="pagination is-rounded is-centered is-small" role="navigation" aria-label="pagination">
-     {% if page_obj.has_other_pages %}
-
-{% if page_obj.has_previous %}
-
-      <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-{% endif %}
-
+<nav aria-label="pagination" class="pagination is-rounded is-centered is-small" role="navigation">
+    {% if page_obj.has_other_pages %}
+    {% if page_obj.has_previous %}
+    <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
     {% if page_obj.has_next %}
-    <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">Next page</a>
-{% endif %}
-
-  <ul class="pagination-list">
-
- {% for p in page_obj.paginator.page_range %}
-
-      {% if page_obj.number == p %}
-      <li>
-          <a class="pagination-link is-current" aria-label="Goto page 1" href="?page={{ p }}">{{ p }}</a>
-      </li>
-
-      {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
-
-      <li>
-          <a class="pagination-link" aria-label="Goto page 1" href="?page={{ p }}">{{ p }}</a>
-      </li>
-      {% endif %}
-
-
-{% endfor %}
-<!--    <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>-->
-<!--    <li><span class="pagination-ellipsis">&hellip;</span></li>-->
-<!--    <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>-->
-<!--    <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>-->
-<!--    <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>-->
-<!--    <li><span class="pagination-ellipsis">&hellip;</span></li>-->
-<!--    <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>-->
-  </ul>
-
-      {% endif %}
+    <a class="pagination-next " href="?page={{ page_obj.next_page_number }}">Next page</a>
+    {% endif %}
+    <ul class="pagination-list">
+        {% for p in page_obj.paginator.page_range %}
+        {% if page_obj.number == p %}
+        <li>
+            <a aria-label="Goto page 1" class="pagination-link is-current" href="?page={{ p }}">{{ p }}</a>
+        </li>
+        {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+        <li>
+            <a aria-label="Goto page 1" class="pagination-link" href="?page={{ p }}">{{ p }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
 </nav>
-
 {% endblock %}
 
 {% block scripts %}
-
 
 {% endblock %}

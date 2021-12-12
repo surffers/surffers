@@ -1,21 +1,25 @@
-.navbar {
-    border: none;
-border-bottom: 1px solid #343C3D;
+.right-side-button-login {
+  position: absolute;
+  right: 70px;
 
+  top: 0;
+  height: 100%;
+  border: 0;
+  width: 52px;
+  display: none;
+  z-index: 99;
+  cursor: pointer;
 }
-.navbar-item.logo {
-    height: auto;
-}
-.navbar-item img {
-    width: 30px;
-    height: 30px;
-}
-.navbar-end.desktop {
-    margin-right: 20px;
 
-}
 .navbar-end.navbar-burger {
     height: auto;
     margin-top: 5px;
     width: auto;
+}
+.navbar-burger.right-side-button {
+    display: block;
+}
+
+.icon.navbar {
+    margin-right: 20px;
 }

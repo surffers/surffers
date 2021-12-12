@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+
+
+
+
+{% block content %}
+<div class="container" x-data="{ rightSide: false, leftSide: false }">
+    {% include 'core/include/navbar.html' %}
+    <div class="main">
+        <div class="category-box has-text-centered">
+            <!--          <div class="search-bar">-->
+            <!--      <input type="text" placeholder="Search bookmark" />-->
+            <!--      <button class="right-side-button-tag">-->
+            <!--          {{ my_categories.all|length }}-->
+            <!--      </button>-->
+            <!--    </div>-->
+            <br>
+            <br>
+            <div class="hero-body">
+                 <h1 class="title">
+                    #{{ tag.title }}
+                  </h1>
+                <p>
+                   Bookmark{{ bookmarks.all|length|pluralize:"s" }} {{ bookmarks.count }}
+                </p>
+            </div>
+        </div>
+
+        <div class="main-container is-centered">
+            <div class="container-card">
+                {% for bookmark in bookmarks %}
+                <div class="card home">
+                    <div class="card-content">
+                        {% if user == category.user %}
+                        <a class="delete category-dropdown" href="{% url 'bookmark_delete' category.id bookmark.id %}"></a>
+                        {% endif %}
+
+                        <div class="media title">
+                            <div class="media-left">
+                                <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}" target="_blank"></a>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-6">
+                                    <a class="title is-6" href="{% url 'detail' bookmark.id %}" target="_blank">
+                                        {{ bookmark.title|truncatechars:50 }}
+                                    </a>
+
+                                </p>
+                                <p class="subtitle is-6">
+                                    for
+                                    <a class="subtitle is-6 has-text-primary" href="{% url 'category' bookmark.category.id %}">
+                                        {{ bookmark.category.title|truncatechars:25 }}
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="media-right"></div>
+                        </div>
+                        <div class="content">
+                            <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                {{ bookmark.body|truncatechars:100 }}
+                            </a>
+                        </div>
+                        <div class="content subtitle is-6">
+                                by
+                            <a class="subtitle is-6 has-text-primary" href="{% url 'profile' bookmark.user.username %}">
+                                {{ bookmark.user.username|truncatechars:20 }}
+                            </a>
+                            &bull;
+                            <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                {{ bookmark.comments.all|length }} comments
+                            </a>
+                        </div>
+                        {% for tag in bookmark.tags.all %}
+                        <a class="tag is-primary is-light" href="{{ tag.get_absolute_url }}">#{{ tag }}</a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                {% empty %}
+
+                {% if user == category.user %}
+                {% else %}
+                <div class="box has-text-centered">
+                    No bookmarks
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+    {% include 'core/include/right-sidebar.html' %}
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $("a.icon-bookmark[href^='http']").each(function() {
+    $(this).css({
+        background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
+        "background-size": "100%", "margin": "5px",
+    });
+});
+</script>
+{% endblock %}

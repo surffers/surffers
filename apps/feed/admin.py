@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, Bookmark
+from .models import Category, Bookmark, Comment, Tag
 
-
+admin.site.register(Tag)
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
@@ -34,7 +34,13 @@ class BookmarkAdmin(admin.ModelAdmin):
 admin.site.register(Bookmark, BookmarkAdmin)
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        'body',
+        'user',
+    )
 
+admin.site.register(Comment, CommentAdmin)
 
 
     

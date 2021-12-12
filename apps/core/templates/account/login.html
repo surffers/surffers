@@ -37,7 +37,7 @@
                         <a class="secondaryAction has-text-primary" href="{% url 'account_reset_password' %}">
                             {% trans "Forgot your password?" %}</a>
                         <br>
-                        <button class="button primaryAction is-outlined is-rounded login" type="submit">
+                        <button class="button primaryAction is-primary is-rounded login" type="submit">
                             {% trans "Sign In" %}
                         </button>
                         {% if redirect_field_value %}
@@ -50,7 +50,7 @@
                     <p class="subtitle is-7 has-text-centered">
                         {% blocktrans with site.name as site_name %}
                         New to Surffers?
-                        <a href="{{ signup_url }}">
+                        <a class="has-text-primary" href="{{ signup_url }}">
                             Sign up
                         </a>
                         {% endblocktrans %}

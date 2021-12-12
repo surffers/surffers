@@ -17,9 +17,14 @@ from apps.feed.forms import CategoryForm
 
 def profile(request, username):
     user = get_object_or_404(User, username=username)
-    user_bookmarks = Bookmark.objects.filter(user=user).select_related('user')
-    bookmarks = Bookmark.objects.all()
-    categories = Category.objects.filter(user=user)
+    user_bookmarks = Bookmark.objects.filter(user=user).select_related('user', 'category')
+
+    categories = Category.objects.filter(user=user).select_related('user')
+
+    number_of_votes = 0
+
+    for bookmark in user.bookmarks.all():
+        number_of_votes = number_of_votes + (bookmark.number_of_votes - 1)
 
     if request.method == 'POST' and 'btnformprofile' in request.POST:
         UserEditForm = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -31,28 +36,19 @@ def profile(request, username):
    
 
 
-    form = CategoryForm(request.POST, request.FILES)
-    if form.is_valid():
-        category = form.save(commit=False)
-        category.user = request.user
-        category.save()
-        messages.success(request, 'The category has been added!')
-        return redirect('dashboard')
-
     AddCategoryForm = CategoryForm(request.POST, request.FILES)
     if AddCategoryForm.is_valid():
         category = AddCategoryForm.save(commit=False)
         category.user = request.user
         category.save()
-        return redirect('dashboard')
+        return redirect('category_lists')
 
     context = { 
         'user': user,
+        'number_of_votes': number_of_votes,
         'categories': categories,
         'user_bookmarks': user_bookmarks,
-        'bookmarks': bookmarks,
         'UserEditForm': UserEditForm,
-        'form': form,
         'AddCategoryForm': AddCategoryForm,
     }
 
@@ -172,6 +168,10 @@ def categories(request, username):
     bookmarks = user.bookmarks.all()
     categories = Category.objects.filter(user=user)
 
+    number_of_votes = 0
+    for bookmark in user.bookmarks.all():
+        number_of_votes = number_of_votes + (bookmark.number_of_votes - 1)
+
     if request.method == 'POST' and 'btnformprofile' in request.POST:
         UserEditForm = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
@@ -189,6 +189,7 @@ def categories(request, username):
         return redirect('dashboard')
 
     context = {
+        'number_of_votes': number_of_votes,
         'user': user,
         'profiles': profiles,
         'bookmarks': bookmarks,

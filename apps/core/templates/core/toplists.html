@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block title %}Surfers - bookmark storage platform{% endblock %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container" x-data="{ rightSide: false, leftSide: false }">
+ {% include 'core/include/right-sidebar.html' %}
+
+    <div class="main">
+        {% include 'core/include/navbar.html' %}
+        <div class="columns is-centered">
+      <div class="column is-9">
+        <div class="category-box has-text-centered">
+            <div class="hero-body">
+                <p class="title is-3">
+                    Top Lists
+                </p>
+                <p class="subtitle is-4">
+                    Top links according to user opinion
+                </p>
+                <p class="subtitle is-5">
+                    Bookmark{{ bookmarks.all|length|pluralize:"s" }} {{ user_bookmarks.all|length }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="main-container">
+
+
+                    <div class="container-card">
+
+
+                        {% for bookmark in page_obj %}
+
+                        <div class="card bookmark">
+                            <div class="card-content">
+                                <div class="media title">
+                                    <div class="media-left">
+                                        <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}"
+                                           target="_blank"></a>
+                                    </div>
+                                    <div class="media-content">
+                                        <p class="title is-6">
+                                            <a class="title is-6" href="{{ bookmark.url }}" target="_blank">
+                                                {{ bookmark.title|truncatechars:30 }}
+                                            </a>
+                                        </p>
+
+                                        <p class="subtitle is-6">
+                                            for
+                                            <a class="has-text-primary"
+                                               href="{% url 'category' bookmark.category.id %}">
+                                                {{ bookmark.category.title|truncatechars:25 }}
+                                            </a>
+                                        </p>
+
+
+                                    </div>
+                                    <div class="media-right"></div>
+                                </div>
+
+                                <div class="content title is-6">
+                                    <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                        {{ bookmark.body|truncatechars:60 }}
+                                    </a>
+
+                                </div>
+
+                                <div class="content title is-6">
+                                    by
+                                    <a class="subtitle is-6 has-text-primary"
+                                       href="{% url 'profile' bookmark.user.username %}">
+                                        {{ bookmark.user.username|truncatechars:20 }}
+                                    </a>
+                                    &bull;
+                                               <time class="subtitle is-6"> {{ bookmark.created_at|naturaltime }}</time>
+                                                                     &bull;
+                                     <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                         {{ bookmark.number_of_votes }} votes
+                                     </a>
+                                    &bull;
+                                    <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                        {{ bookmark.comments.all|length }} comments
+                                    </a>
+                                </div>
+
+                            </div>
+                            <footer class="card-footer">
+                            <a href="{% url 'vote' bookmark.id %}" class="card-footer-item has-text-primary title is-4">
+                                 🎙
+                                 {{ bookmark.number_of_votes }} votes
+                            </a>
+                          </footer>
+                        </div>
+
+
+                        {% empty %}
+                        <div class="box">
+                            <p class="title is-6 has-text-centered">
+                                No bookmark
+                            </p>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="section">
+                        {% include 'core/include/pagination.html' %}
+                    </div>
+
+
+
+        </div>
+
+</div>
+            </div>
+    </div>
+
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $("a.icon-bookmark[href^='http']").each(function() {
+    $(this).css({
+        background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
+        "background-size": "100%",
+    });
+});
+</script>
+
+{% endblock %}

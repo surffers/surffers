@@ -16,21 +16,25 @@ Including another URLconf
 
 from django.urls import path
 
-from apps.feed.views import category, category_edit, category_delete, bookmark_add, bookmark_delete, vote, detail
+from apps.feed.views import category, category_edit, category_delete, bookmark_add, bookmark_delete, vote, detail, \
+    comment_delete, tags
 
 
 
 urlpatterns = [
     #
     #
-    path('b/<int:bookmark_id>/vote/', vote, name='vote'),
-    path('b/<int:bookmark_id>/', detail, name='detail'),
+    path('b/<uuid:bookmark_id>/vote/', vote, name='vote'),
+    path('b/<uuid:bookmark_id>/', detail, name='detail'),
+
+    path('b/<uuid:bookmark_id>/delete_comment/<int:comment_id>/', comment_delete, name='comment_delete'),
+
     path('category/<uuid:category_id>/', category, name='category'),
     path('category/<uuid:category_id>/edit/', category_edit, name='category_edit'),
     path('category/<uuid:category_id>/delete/', category_delete, name='category_delete'),
     path('category/<uuid:category_id>/add_bookmark/', bookmark_add, name='add_bookmark'),
-    path('category/<uuid:category_id>/delete_bookmark/<int:bookmark_id>/', bookmark_delete, name='bookmark_delete'),
-
+    path('category/<uuid:category_id>/delete_bookmark/<uuid:bookmark_id>/', bookmark_delete, name='bookmark_delete'),
+    path('tag/<slug:slug>/', tags, name='tags'),
 
 ] 
 

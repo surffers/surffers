@@ -15,6 +15,7 @@
 @import "/static/css/settings.css";
 @import "/static/css/sidebar.css";
 @import "/static/css/category.css";
+@import "/static/css/sponsor.css";
 
 
 
@@ -27,24 +28,17 @@ body {
     font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.border {
-    border: 1px solid red;
+
+.subtitle {
+    font-weight: 300;
 }
-
-
 .share {
     margin-right: 10px;
 }
-.box {
-    border-radius: 0px;
-    cursor: pointer;
+.pagination-link.is-current {
+    background: #EB6864;
+    border-color: #EB6864;
 }
-
-
-
-
-
-
 
 input.input::placeholder {
    color: #8C9B9D;
@@ -70,6 +64,8 @@ textarea.textarea::placeholder {
 
 textarea.textarea {
     background-color: transparent;
+    height: 90px;
+    min-height: 40px;
     max-height: 90px;
     color: #8C9B9D;
 }
@@ -79,3 +75,20 @@ textarea.textarea {
 }
 
 
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(21, 20, 26, 0.63);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+   display: none;
+}
+
+::-webkit-scrollbar-thumb {
+   display: none;
+}

@@ -1,33 +1,43 @@
 {% extends 'base.html' %}
-{% block title %}Categories | Surffers{% endblock %}
+{% block title %}User Categories | Surffers{% endblock %}
 
 {% load static %}
 {% block content %}
 
 <div class="container" x-data="{ rightSide: false, leftSide: false }">
-{% include 'core/include/navbar.html' %}
+    {% include 'core/include/right-sidebar.html' %}
+
   <div class="main">
-      <div class="profile-box">
-          <br><br>
-  <div class="hero-body">
-
-
-                         <div class="media">
-
+       {% include 'core/include/navbar.html' %}
+       <div class="columns is-centered">
+      <div class="column is-7">
+      <div class="profile-box has-text-centered">
+     <br><br>
+            <div class="hero-body">
           {% if user.profile.url %}
-             <div class="media-left">
-                <a class="card-footer-item icon-bookmark" href="{{ user.profile.url }}" target="_blank"></a>
-                 </div>
+            <a class="card-footer-item icon-bookmark" href="{{ user.profile.url }}" target="_blank"></a>
           {% else %}
 
+           {% endif %}
+      <p class="title is-4">{{ user.username|truncatechars:25 }}</p>
 
+      <div class="tabs is-centered is-small">
+          <ul>
+              <li><a>{{ user.comments.all|length }} comments</a></li>
+            <li><a>{{ number_of_votes }} votes</a></li>
+
+          </ul>
+        </div>
+
+        <br>
+            <p class="subtitle is-6">
+                {% if user.profile.bio %}
+                {{ user.profile.bio }}
+                {% else %}
+                No bio
                 {% endif %}
-
-
-      <div class="media-content">
-        <p class="title is-5">{{ user.username|truncatechars:11 }}</p>
-      </div>
-            <div class="media-right">
+            </p>
+ <div class="media profile">
                 {% if user != request.user %}
 
                 {% if request.user.profile in user.profile.followed_by.all %}
@@ -38,9 +48,9 @@
 
                 {% if request.user.is_authenticated %}
                 <span class="follow">
-                    <a class="button is-white is-outlined follow is-small is-rounded" href="{% url 'follow_user' user.username %}">
-                    Follow
-                </a>
+                    <a class="button is-primary" href="{% url 'follow_user' user.username %}">
+                        Follow
+                    </a>
                 </span>
                 {% endif %}
                 {% endif %}
@@ -50,24 +60,14 @@
 
                 {% include 'profiles/include/user-edit-profile.html' %}
 
-        {% endif %}
-            </div>
-    </div>
-      <br>
- <p class="subtitle is-6">
-                {% if user.profile.bio %}
-                {{ user.profile.bio }}
-                {% else %}
-                No bio
                 {% endif %}
-            </p>
-
+            </div>
   </div>
-<hr>
-<nav class="level is-mobile">
+
+<nav class="level is-mobile profile">
     <div class="level-item has-text-centered">
         <div>
-            <a class="has-text-white">
+            <a href="{% url 'profile' request.user.username %}" class="title">
                 <p class="heading">Links</p>
             <p class="title is-5">{{ user_bookmarks.all|length }}</p>
             </a>
@@ -75,15 +75,15 @@
     </div>
     <div class="level-item has-text-centered">
         <div>
-                   <a href="{% url 'categories' user.username %}" >
+                   <a href="{% url 'categories' user.username %}" class="has-text-primary">
                 <p class="heading">Categories</p>
-            <p class="title is-5 has-text-link">{{ categories.all|length }}</p>
+            <p class="title is-5 has-text-primary">{{ categories.all|length }}</p>
             </a>
         </div>
     </div>
     <div class="level-item has-text-centered">
         <div>
-            <a href="{% url 'follows' user.username %}" class="has-text-white">
+            <a href="{% url 'follows' user.username %}" class="title">
                 <p class="heading">
                     Following
                 </p>
@@ -95,7 +95,7 @@
     </div>
     <div class="level-item has-text-centered">
         <div>
-            <a href="{% url 'followers' user.username %}" class="has-text-white">
+            <a href="{% url 'followers' user.username %}" class="title">
                 <p class="heading">Followers</p>
                 <p class="title is-5">{{ user.profile.followed_by.count }}</p>
             </a>
@@ -103,57 +103,61 @@
     </div>
 
 </nav>
-<hr>
+
 </div>
+
     <div class="main-container">
  <div class="container-card">
                  {% for category in categories %}
 
                     <div class="card dashboard">
-                        <div class="card-content">
-                            <div class="media">
-                                <a href="{% url 'category' category.id %}">
-                                    <p class="title is-7" title="{{ category.title }}">
-                                        {{ category.title|truncatechars:25}}
-                                    </p>
-                                </a>
-
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <p class="title is-5">
+                                    <a class="title is-5 " href="{% url 'category' category.id %}">
+                                        {{ category.title|truncatechars:40 }}
+                                    </a>
+                                </p>
                             </div>
-                            {% if category.body %}
-                            <a href="{% url 'category' category.id %}">
-                                <p class="subtitle is-7">
-                                    {{ category.body|truncatechars:30 }}
-                                </p>
-                            </a>
-                            {% else %}
-                            <a href="{% url 'category' category.id %}">
-                                <p class="subtitle is-7">
-                                    No description
-                                </p>
-                            </a>
-
-                            {% endif %}
-
-
-
                         </div>
-                    </div>
-                    {% empty %}
-                            <div class="box">
-                                <h2 class="title is-6 has-text-centered">
-                                    No category
-                                </h2>
+                        <div class="content dashboard">
+                            <a class="subtitle is-6" href="{% url 'category' category.id %}">
+                                {{ category.body|truncatechars:85 }}
+                            </a>
+                        </div>
+
+                         <div class="media">
+                             <div class="media-left">
+                                 <a class="subtitle is-6" href="{% url 'category' category.id %}">
+                                     bookmarks
+                                 </a>
+
+                                 <div class="tag">
+                                {{ category.bookmarks.all|length }}
                             </div>
+                             </div>
+
+                       </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="box">
+                    <h2 class="title is-6 has-text-centered">
+                        No category
+                    </h2>
+                </div>
                     {% endfor %}
 
                 </div>
             </div>
 
 
-
+</div>
+           </div>
   </div>
 
-   {% include 'core/include/right-sidebar.html' %}
+
 
 </div>
 

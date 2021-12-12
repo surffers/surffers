@@ -6,165 +6,160 @@
 
 {% block content %}
 <div class="container" x-data="{ rightSide: false, leftSide: false }">
-{% include 'core/include/navbar.html' %}
-  <div class="main">
-      <br><br>
-      <div class="category-box has-text-centered">
+    {% include 'core/include/right-sidebar.html' %}
 
-  <div class="hero-body">
-       <p class="title is-4">
-                            {{ category.title }}
-                        </p>
-                        <p class="subtitle is-6">
-                            {{ category.body }}
-                        </p>
-                        <p class="title is-6">
-                            {{ category.created_at|naturaltime }}
-                            &bull;
-                            {{ category.bookmarks.all|length|intword }}
-                            bookmarks
-                             <br>
-      <a class="subtitle is-6" href="{% url 'profile' category.user.username %}">
-                                by {{ category.user.username|truncatechars:20 }}
-                            </a>
-                        </p>
-
-
-                        <div class="btn-category">
-                            {% if user == category.user %}
-
-                        {% include 'feed/include/delete-category.html' %}
+    <div class="main">
+         {% include 'core/include/navbar.html' %}
+        <br><br>
+            <div class="hero-body">
+                <div class="has-text-centered">
+                    <p class="title is-3">
+                    {{ category.title }}
+                </p>
+                <p class="subtitle is-4">
+                    {{ category.body }}
+                </p>
+                <p class="subtitle is-5">
+                    {{ category.created_at|naturaltime }}
+                    &bull;
+                    {{ category.bookmarks.all|length|intword }}
+                    bookmarks
+                    &bull;
+                    by
+                    <a class="subtitle is-5 has-text-primary" href="{% url 'profile' category.user.username %}">
+                        {{ category.user.username|truncatechars:20 }}
+                    </a>
+                </p>
 
 
-                        {% include 'feed/category_edit.html' %}
+                <div class="btn-category">
+                    {% if user == category.user %}
 
-                             {% endif %}
+                    {% include 'feed/include/delete-category.html' %}
 
-                        <div class="dropdown is-hoverable">
-                            <div class="dropdown-trigger">
-                                <a class="button is-small is-rounded">
-                                    <i class="fas fa-share share"></i>
-                                    Share category
-                                </a>
-                            </div>
-                            <div class="dropdown-menu category-dropdown" id="dropdown-menu4" role="menu">
-                                <div class="dropdown-content">
-                                    <a class="dropdown-item" role="button">
+
+                    {% include 'feed/category_edit.html' %}
+
+                    {% endif %}
+
+                    <div class="dropdown is-hoverable">
+                        <div class="dropdown-trigger">
+                            <a class="button is-ghost has-text-primary is-small detail">
+                                                🔗
+                                                Share category
+                                            </a>
+
+                        </div>
+                        <div class="dropdown-menu category-dropdown" id="dropdown-menu4" role="menu">
+                            <div class="dropdown-content">
+                                <a class="dropdown-item" role="button">
                                                <span class="copy-icon">
                                   <i class="fas fa-link icon"></i>
                                   Copy
                               </span>
-                                    </a>
-                                    <a class="sharer dropdown-item" id="share-em">
-                                        <i class="fa fa-envelope icon"></i>
-                                        Email
-                                    </a>
-                                    <a class="sharer dropdown-item" href="#" id="share-wa">
-                                        <i class="fab fa-whatsapp icon"></i>
-                                        Whatsapp
-                                    </a>
-                                    <a class="sharer dropdown-item" href="#" id="share-tg">
-                                        <i class="fab fa-telegram-plane icon"></i>
-                                        Telegram
-                                    </a>
-                                    <a class="sharer dropdown-item" href="#" id="share-fb">
-                                        <i class="fab fa-facebook-f icon"></i>
-                                        Facebook
-                                    </a>
-                                    <a class="sharer dropdown-item" href="#" id="share-tw">
-                                        <i class="fab fa-twitter icon"></i>
-                                        Twitter
-                                    </a>
-                                    <a class="sharer dropdown-item" href="#" id="share-rt">
-                                        <i class="fab fa-reddit-alien icon"></i>
-                                        Reddit
-                                    </a>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        </div>
-  </div>
-
-</div>
-    <div class="main-container is-centered">
-
-
-
-                <div class="container-card">
-                        {% if user == category.user %}
-                        {% include 'feed/add_bookmark.html' %}
-                    {% endif %}
-
-
-                    {% for bookmark in category.bookmarks.all %}
-
-                        <div class="card home">
-
-                            <div class="card-content">
-                                {% if user == category.user %}
-                                <a class="delete category-dropdown" href="{% url 'bookmark_delete' category.id bookmark.id %}"></a>
-                                {% endif %}
-                                <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}" target="_blank"></a>
-
-                                <a href="{{ bookmark.url }}" target="_blank">
-                                    <p class="title is-6 bookmark-title" title="{{ bookmark.title }}">
-                                        {{ bookmark.title|truncatechars:22 }}
-                                    </p>
-                                    <p class="subtitle is-7 bookmark-title">
-                                        {% if bookmark.body %}
-                                        {{ bookmark.body }}
-                                        {% else %}
-                                        {% endif %}
-                                    </p>
-                                    <p class="title is-7 visit-title">
-                                        {{ bookmark.created_at|naturalday }}
-                                    </p>
-<!--                                    <p class="title is-7 visit-title">-->
-<!--                                        Visit: 29-->
-<!--                                    </p>-->
-
                                 </a>
-                                <p class="subtitle is-7 visit-title">
-                                    Visit: 29
-                                    </p>
-                                <div class="media">
-                                    <div class="media-left">
-                                       <i class="far fa-heart"></i>
-<!--                                        <i class="fas fa-heart"></i>-->
-                                    </div>
-                                    <div class="media-content"></div>
-                                    <div class="media-right">
-                                       <i class="far fa-comment-alt"></i>
-                                    </div>
-                                </div>
+                                <a class="sharer dropdown-item" id="share-em">
+                                    <i class="fa fa-envelope icon"></i>
+                                    Email
+                                </a>
+                                <a class="sharer dropdown-item" href="#" id="share-wa">
+                                    <i class="fab fa-whatsapp icon"></i>
+                                    Whatsapp
+                                </a>
+                                <a class="sharer dropdown-item" href="#" id="share-tg">
+                                    <i class="fab fa-telegram-plane icon"></i>
+                                    Telegram
+                                </a>
+                                <a class="sharer dropdown-item" href="#" id="share-fb">
+                                    <i class="fab fa-facebook-f icon"></i>
+                                    Facebook
+                                </a>
+                                <a class="sharer dropdown-item" href="#" id="share-tw">
+                                    <i class="fab fa-twitter icon"></i>
+                                    Twitter
+                                </a>
+                                <a class="sharer dropdown-item" href="#" id="share-rt">
+                                    <i class="fab fa-reddit-alien icon"></i>
+                                    Reddit
+                                </a>
+
                             </div>
+
+
                         </div>
-                    {% empty %}
+                    </div>
 
-                    <div class="column is-0">
+                </div>
+                </div>
+                <br>
+                {% if user == category.user %}
+                {% include 'feed/add_bookmark.html' %}
+                {% endif %}
+            </div>
 
 
+
+        <div class="main-container">
+            <div class="container-card">
+                {% for bookmark in category.bookmarks.all %}
+                <div class="card home">
+                    <div class="card-content">
+                        {% if user == category.user %}
+                        <a class="delete category-dropdown"
+                           href="{% url 'bookmark_delete' category.id bookmark.id %}"></a>
+                        {% endif %}
+
+                        <div class="media title">
+                            <div class="media-left">
+                                <a class="card-footer-item icon-bookmark" href="{{ bookmark.url }}" target="_blank"></a>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">
+                                    <a class="title is-4" href="{{ bookmark.url }}" target="_blank">
+                                        {{ bookmark.title|truncatechars:45 }}
+                                    </a>
+                                </p>
+
+                            </div>
+                            <div class="media-right"></div>
+                        </div>
+                        <div class="content">
+                            <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                {{ bookmark.body|truncatechars:80 }}
+                            </a>
+
+                        </div>
+                        <div class="content subtitle is-6 ">
+                                by
+                            <a class="subtitle is-6 has-text-primary" href="{% url 'profile' bookmark.user.username %}">
+                                 {{ bookmark.user.username|truncatechars:20 }}
+                            </a>
+                            &bull;
+
+                                     <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                         {{ bookmark.number_of_votes }} votes
+                                     </a>
+                                    &bull;
+                            <a class="subtitle is-6" href="{% url 'detail' bookmark.id %}">
+                                {{ bookmark.comments.all|length }} comments
+                            </a>
+                        </div>
 
                     </div>
-                    {% if user == category.user %}
-                        {% else %}
-                    <div class="box has-text-centered">
-                            No category
-                                </div>
-                      {% endif %}
-                    {% endfor %}
                 </div>
+                {% empty %}
+
+
+                <div class="box has-text-centered">
+                    No bookmarks
+                </div>
+
+                {% endfor %}
             </div>
-  </div>
-  {% include 'core/include/right-sidebar.html' %}
+        </div>
+    </div>
+
 </div>
-
-
-
 
 <span class="toastbox" role="alert"></span>
 
@@ -176,9 +171,10 @@
   $("a.icon-bookmark[href^='http']").each(function() {
     $(this).css({
         background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
-        "background-size": "22px 22px",
+        "background-size": "100%",
     });
 });
+
 </script>
 
 <script>
@@ -307,6 +303,7 @@
   })();
 
   copyToClipboard.handleCopyIconClick();
+
 
 
 </script>

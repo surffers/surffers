@@ -43,7 +43,7 @@ urlpatterns = [
     path('', include('apps.profiles.urls')),
     #
 
-    # path("paddle/", include("djpaddle.urls", namespace="djpaddle")),
+    path("paddle/", include("djpaddle.urls", namespace="djpaddle")),
 
  
    

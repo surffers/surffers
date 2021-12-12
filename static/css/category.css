@@ -3,18 +3,6 @@
     top: 5%;
     position: absolute;
 }
-.button.add-category {
-
-    border-radius: 100px;
-
-}
-
-.button.add-category-two {
-    width: 80px;
-    height: 80px;
-    max-width:80px;
-    min-width:80px;
-}
 .button.category-delete {
     width: 30px;
     max-width:30px;
@@ -27,12 +15,13 @@
 
 }
 
-.category-box {
-    width: 100%;
-    border-bottom: 1px solid #343C3D;
+.hero-body #add-bookmark {
+     width: 100px;
+     margin: 0 auto;
+     display: block;
 }
 .btn-category {
-width: 100%;
+   width: 100%;
    display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -42,4 +31,12 @@ width: 100%;
 
 .visit-title {
     padding-top: 10px;
+}
+.hero-body {
+    max-width: 700px;
+    margin: 0 auto;
+}
+span .add-category img {
+    margin-top: 10px;
+    cursor: pointer
 }

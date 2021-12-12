@@ -4,132 +4,71 @@
 {% load account socialaccount %}
 
 {% block content %}
-<!--{% include 'core/include/footer.html' %}-->
-<footer id="footer" class="footer mt-4">
-
-        <div class="section">
-            <div class="columns is-multiline is-centered is-flex">
-            <div class="column is-2-fullhd is-4-mobile">
-              <h3 class="title is-5">About</h3>
+<footer class="footer section">
+    <div class="section">
+        <div class="columns is-multiline is-centered">
+            <div class="column is-3">
+                <h3 class="title is-5">Surffers</h3>
                 <nav class="footer-nav">
-                    <ul>
-                        <li>
-                            <a href="#" class="subtitle is-7">About us</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'blog' %}" class="subtitle is-7">Blog</a>
-                        </li>
-                        <li>
-                            <a href="#" class="subtitle is-7">Jobs</a>
-                        </li>
-                    </ul>
+                    Platform for creating collections of sites and tools. Create categories, save bookmarks, vote,
+                    comment and share with your friends.
                 </nav>
-            </div>
-            <div class="column is-2-fullhd is-4-mobile">
-              <h3 class="title is-5">Support</h3>
-                <nav class="footer-nav">
-                    <ul>
-                        <li>
-                            <a href="#" class="subtitle is-7">Help Center</a>
-                        </li>
-                        <li>
-                            <a href="#" class="subtitle is-7">Our Rules</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="column is-2-fullhd is-4-mobile">
-              <h3 class="title is-5">Legal</h3>
-                <nav class="footer-nav">
-                    <ul>
-                        <li>
-                            <a href="#" class="subtitle is-7">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="#" class="subtitle is-7">Terms of Use</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        </div>
-
-
-
-    <div class="copyright">
-        <div class="copyright-text">
-            <div class="columns is-centered">
-               <div class="column is-5">
-                <p class="footer-title">
-                    <img src="/static/img/surffers-logo-2.png" alt="">
-                Surffers, © 2021
-                </p>
-            </div>
-               <div class="column is-2">
-                   <div class="social-links is-flex mt-3">
-                    <a href="#" class="has-text-primary">
+                <h3 class="title is-5">Follow us</h3>
+                <div class="social-links is-flex mt-3">
+                    <a class="has-text-primary" href="#">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="has-text-primary">
+                    <a class="has-text-primary" href="#">
                         <i class="fa fa-instagram"></i>
                     </a>
-                    <a href="#" class="has-text-primary">
+                    <a class="has-text-primary" href="#">
                         <i class="fa fa-youtube"></i>
                     </a>
                 </div>
-               </div>
-           </div>
+            </div>
+            <div class="column is-1">
+            </div>
+            <div class="column is-2">
+                <h3 class="title is-5">Subscribe</h3>
+                <nav class="footer-nav">
+                    Subscribe to our weekly newsletter to receive the best tools, resources and discounts!
+                </nav>
+                <div class="field is-grouped">
+<!--                    <p class="control is-expanded has-icons-left">-->
+<!--                        <input autocomplete="email" class="input" placeholder="Email" type="email">-->
+<!--                        <span class="icon is-small is-left">-->
+<!--                      <i class="fas fa-envelope"></i>-->
+<!--                    </span>-->
+<!--                    </p>-->
+                    <p class="control">
+                        <a href="#!" class="button is-primary paddle_button" data-theme="none" data-product="{{ 744394 }}" data-email="{{ user.email }}">
+                           Purchase Subscription
+                       </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="columns is-centered">
+            <div class="column is-6">
+                <p class="footer-title">
+                    Surffers, © 2021
+                </p>
+            </div>
+<!--            <div class="column is-2">-->
+<!--                <div class="footer-menu">-->
+<!--                    <ul>-->
+<!--                        <li><a href="#">Terms</a></li>-->
+<!--                        <li><a href="#">Privacy</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </footer>
-
-
 {% endblock %}
 
 {% block scripts %}
-<script>
-  $("a.icon-bookmark[href^='http']").each(function() {
-    $(this).css({
-        background: "url(http://www.google.com/s2/favicons?domain=" + this.href + ") left center no-repeat",
-        "background-size": "22px 22px",
-    });
-});
-</script>
-
-<script>
-    (function() {
-  $('.dashboard-nav__item').on('click', function(e) {
-    var itemId;
-    e.preventDefault();
-    $('.dashboard-nav__item').removeClass('dashboard-nav__item--selected');
-    $(this).addClass('dashboard-nav__item--selected');
-    itemId = $(this).children().attr('href');
-    $('.dashboard-content__panel').hide();
-    $('.dashboard-content__panel[data-panel-id=' + itemId + ']').show();
-    if (itemId === 'my_trip') {
-      $('.dashboard-preview').show();
-    } else {
-      $('.dashboard-preview').hide();
-    }
-    return console.log(itemId);
-  });
-
-  $('.dashboard-list__item').on('click', function(e) {
-    var itemId;
-    e.preventDefault();
-    $('.dashboard-list__item').removeClass('dashboard-list__item--active');
-    $(this).addClass('dashboard-list__item--active');
-    itemId = $(this).attr('data-item-id');
-    $('.dashboard-preview__panel').hide();
-    $('.dashboard-preview__panel[data-panel-id=' + itemId + ']').show();
-    return console.log(itemId);
-  });
-
-}).call(this);
-
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiPGFub255bW91cz4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBQSxDQUFBLENBQUUsc0JBQUYsQ0FBeUIsQ0FBQyxFQUExQixDQUE2QixPQUE3QixFQUFzQyxRQUFBLENBQUMsQ0FBRCxDQUFBO0FBQ3RDLFFBQUE7SUFBRSxDQUFDLENBQUMsY0FBRixDQUFBO0lBRUEsQ0FBQSxDQUFFLHNCQUFGLENBQXlCLENBQUMsV0FBMUIsQ0FBc0MsK0JBQXRDO0lBQ0EsQ0FBQSxDQUFFLElBQUYsQ0FBTyxDQUFDLFFBQVIsQ0FBaUIsK0JBQWpCO0lBRUEsTUFBQSxHQUFTLENBQUEsQ0FBRSxJQUFGLENBQU8sQ0FBQyxRQUFSLENBQUEsQ0FBa0IsQ0FBQyxJQUFuQixDQUF3QixNQUF4QjtJQUVULENBQUEsQ0FBRSwyQkFBRixDQUE4QixDQUFDLElBQS9CLENBQUE7SUFDQSxDQUFBLENBQUUsMENBQUEsR0FBNkMsTUFBN0MsR0FBc0QsR0FBeEQsQ0FBNEQsQ0FBQyxJQUE3RCxDQUFBO0lBRUEsSUFBRyxNQUFBLEtBQVUsU0FBYjtNQUNFLENBQUEsQ0FBRSxvQkFBRixDQUF1QixDQUFDLElBQXhCLENBQUEsRUFERjtLQUFBLE1BQUE7TUFHRSxDQUFBLENBQUUsb0JBQUYsQ0FBdUIsQ0FBQyxJQUF4QixDQUFBLEVBSEY7O1dBS0EsT0FBTyxDQUFDLEdBQVIsQ0FBWSxNQUFaO0VBaEJvQyxDQUF0Qzs7RUFrQkEsQ0FBQSxDQUFFLHVCQUFGLENBQTBCLENBQUMsRUFBM0IsQ0FBOEIsT0FBOUIsRUFBdUMsUUFBQSxDQUFDLENBQUQsQ0FBQTtBQUN2QyxRQUFBO0lBQUUsQ0FBQyxDQUFDLGNBQUYsQ0FBQTtJQUVBLENBQUEsQ0FBRSx1QkFBRixDQUEwQixDQUFDLFdBQTNCLENBQXVDLDhCQUF2QztJQUNBLENBQUEsQ0FBRSxJQUFGLENBQU8sQ0FBQyxRQUFSLENBQWlCLDhCQUFqQjtJQUVBLE1BQUEsR0FBUyxDQUFBLENBQUUsSUFBRixDQUFPLENBQUMsSUFBUixDQUFhLGNBQWI7SUFFVCxDQUFBLENBQUUsMkJBQUYsQ0FBOEIsQ0FBQyxJQUEvQixDQUFBO0lBQ0EsQ0FBQSxDQUFFLDBDQUFBLEdBQTZDLE1BQTdDLEdBQXNELEdBQXhELENBQTRELENBQUMsSUFBN0QsQ0FBQTtXQUVBLE9BQU8sQ0FBQyxHQUFSLENBQVksTUFBWjtFQVhxQyxDQUF2QztBQWxCQSIsInNvdXJjZXNDb250ZW50IjpbIiQoJy5kYXNoYm9hcmQtbmF2X19pdGVtJykub24gJ2NsaWNrJywgKGUpIC0+XG4gIGUucHJldmVudERlZmF1bHQoKVxuICBcbiAgJCgnLmRhc2hib2FyZC1uYXZfX2l0ZW0nKS5yZW1vdmVDbGFzcyAnZGFzaGJvYXJkLW5hdl9faXRlbS0tc2VsZWN0ZWQnXG4gICQodGhpcykuYWRkQ2xhc3MgJ2Rhc2hib2FyZC1uYXZfX2l0ZW0tLXNlbGVjdGVkJ1xuICBcbiAgaXRlbUlkID0gJCh0aGlzKS5jaGlsZHJlbigpLmF0dHIgJ2hyZWYnXG4gICAgXG4gICQoJy5kYXNoYm9hcmQtY29udGVudF9fcGFuZWwnKS5oaWRlKClcbiAgJCgnLmRhc2hib2FyZC1jb250ZW50X19wYW5lbFtkYXRhLXBhbmVsLWlkPScgKyBpdGVtSWQgKyAnXScpLnNob3coKVxuICBcbiAgaWYgaXRlbUlkID09ICdteV90cmlwJ1xuICAgICQoJy5kYXNoYm9hcmQtcHJldmlldycpLnNob3coKVxuICBlbHNlXG4gICAgJCgnLmRhc2hib2FyZC1wcmV2aWV3JykuaGlkZSgpXG4gIFxuICBjb25zb2xlLmxvZyhpdGVtSWQpXG4gIFxuJCgnLmRhc2hib2FyZC1saXN0X19pdGVtJykub24gJ2NsaWNrJywgKGUpIC0+XG4gIGUucHJldmVudERlZmF1bHQoKVxuICBcbiAgJCgnLmRhc2hib2FyZC1saXN0X19pdGVtJykucmVtb3ZlQ2xhc3MgJ2Rhc2hib2FyZC1saXN0X19pdGVtLS1hY3RpdmUnXG4gICQodGhpcykuYWRkQ2xhc3MgJ2Rhc2hib2FyZC1saXN0X19pdGVtLS1hY3RpdmUnXG4gIFxuICBpdGVtSWQgPSAkKHRoaXMpLmF0dHIgJ2RhdGEtaXRlbS1pZCdcbiAgXG4gICQoJy5kYXNoYm9hcmQtcHJldmlld19fcGFuZWwnKS5oaWRlKClcbiAgJCgnLmRhc2hib2FyZC1wcmV2aWV3X19wYW5lbFtkYXRhLXBhbmVsLWlkPScgKyBpdGVtSWQgKyAnXScpLnNob3coKVxuICBcbiAgY29uc29sZS5sb2coaXRlbUlkKSJdfQ==
-//# sourceURL=coffeescript
-</script>
-
 
 {% endblock %}

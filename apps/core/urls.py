@@ -19,7 +19,7 @@ from django.contrib.auth import views
 
 from django.conf.urls import handler400, handler403, handler404, handler500
 
-from apps.core.views import test, settings, dashboard, home, sponsor, users, blog
+from apps.core.views import test, categorylists, bookmarklists, toplists, followslists, home, sponsor, users, blog
 from . import views
 
 
@@ -28,15 +28,16 @@ urlpatterns = [
     #
 
     path('', home, name='home'),
-    path('dashboard/', dashboard, name='dashboard'),
+    path('categories/', categorylists, name='category_lists'),
+    path('explore/', bookmarklists, name='explore'),
+    path('top-lists/', toplists, name='top_lists'),
+    path('follows-lists/', followslists, name='follows_lists'),
     path('users/', users, name='users'),
     path('sponsor/', sponsor, name='sponsor'),
     path('tests/', test, name='test'),
-    path('settings/', settings, name='settings'),
     path('blog/', blog, name='blog'),
 
-    path('user_settings/', views.userSettings, name="user_settings"),
-	path('update_theme/', views.updateTheme, name="update_theme"),
- 
+
+
 ] 
 

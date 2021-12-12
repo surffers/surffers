@@ -9,100 +9,22 @@
 
     <link href="/static/img/surffers-logo.png" rel="icon" sizes="32x32" type="image/png">
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/691d19bd0b.js"></script>
-    <link id="mystylesheet" rel="stylesheet" type="text/css" href="{% static 'css/dark.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/light.css' %}">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
+    {% include "djpaddle_post_checkout.html" %}
 
 
 
-
-
-
-
-	<script type="text/javascript">
-
-		function getCookie(name) {
-		    var cookieValue = null;
-		    if (document.cookie && document.cookie !== '') {
-		        var cookies = document.cookie.split(';');
-		        for (var i = 0; i < cookies.length; i++) {
-		            var cookie = cookies[i].trim();
-		            // Does this cookie string begin with the name we want?
-		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-		                break;
-		            }
-		        }
-		    }
-		    return cookieValue;
-		}
-		var csrftoken = getCookie('csrftoken');
-
-
-
-		var cssFile = "{% static 'css' %}"
-
-
-		function swapStyles(sheet){
-			document.getElementById('mystylesheet').href = cssFile + '/' + sheet
-			localStorage.setItem('theme', sheet)
-
-			updateTheme(sheet)
-		}
-
-
-		function loadSettings(){
-			//Call data and set local storage
-
-			var url = "{% url 'user_settings' %}"
-			fetch(url, {
-				method:'GET',
-				headers:{
-					'Content-type':'application/json'
-				}
-			})
-			.then((response) => response.json())
-			.then(function(data){
-
-				console.log('Data:', data)
-
-				var theme = data.value;
-
-				if (theme == 'light.css' || null){
-					swapStyles('light.css')
-				}else if(theme == 'dark.css'){
-					swapStyles('dark.css')
-				}
-
-
-			})
-
-		}
-
-		loadSettings()
-
-
-		function updateTheme(theme){
-			var url = "{% url 'update_theme' %}"
-			fetch(url, {
-				method:'POST',
-				headers:{
-					'Content-type':'application/json',
-					'X-CSRFToken':csrftoken,
-				},
-				body:JSON.stringify({'theme':theme})
-			})
-		}
-	</script>
 {% block content %}
 
 {% endblock %}
-<!--        <a class="suppoprt-me" href="https://www.buymeacoffee.com/surffers.com" target="_blank">-->
-<!--    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a Coffee&nbsp&emoji=&slug=marioduarte&button_colour=FF5F5F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00">-->
-<!--</a>-->
+<!--        <a class="button is-rounded is-active is-primary suppoprt-me" >-->
+<!--            ➕-->
+<!--        </a>-->
 
 
 <!-- Scripts -->
@@ -115,6 +37,10 @@
 <script src="{% static 'js/js.js' %}"></script>
 <script src="{% static 'js/sharer.js' %}"></script>
 
+<script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+<script type="text/javascript">
+	Paddle.Setup({ vendor: 137716 });
+</script>
 {% block scripts %}
 
 {% endblock %}

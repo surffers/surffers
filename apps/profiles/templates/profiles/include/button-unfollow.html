@@ -7,7 +7,7 @@
 
 <div id="btn-unfollow">
     
-    <a @click="toggleDialog"  class="button is-primary is-outlined is-success is-small is-rounded">
+    <a @click="toggleDialog"  class="button is-primary is-outlined is-small is-rounded">
         <i class="fas fa-check icon"></i>
       </a>
 
@@ -25,7 +25,7 @@
         </section>
         <footer class="modal-card-foot">
             <a href="{% url 'unfollow_user' user.username %}" class="card-footer-item has-text-danger" >Unfollow</a>
-            <a class="card-footer-item has-text-light" @click="showDialog = !showDialog">
+            <a class="card-footer-item" @click="showDialog = !showDialog">
                 Cancel
             </a>
         </footer>

@@ -5,25 +5,24 @@
 {% block content %}
 
 <div class="container" x-data="{ rightSide: false, leftSide: false }">
-{% include 'core/include/navbar.html' %}
+
+     {% include 'core/include/right-sidebar.html' %}
   <div class="main">
 
-
+{% include 'core/include/navbar.html' %}
       <div class="category-box has-text-centered">
-<!--          <div class="search-bar">-->
-<!--      <input type="text" placeholder="Search bookmark" />-->
-<!--      <button class="right-side-button-tag">-->
-<!--          {{ profiles.all|length }}-->
-<!--      </button>-->
-<!--    </div>-->
+
           <br><br>
   <div class="hero-body">
-       <p class="title is-4">
+       <p class="title is-3">
                             Users
                         </p>
-                        <p class="subtitle is-6">
+                        <p class="subtitle is-4">
                             Find a user and follow him
                         </p>
+      <p class="subtitle is-5">
+                    User{{ profiles.all|length|pluralize:"s" }} {{ profiles.all|length }}
+                </p>
 
   </div>
 
@@ -60,7 +59,7 @@
 
   </div>
 
-   {% include 'core/include/right-sidebar.html' %}
+
 
 </div>
 
